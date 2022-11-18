@@ -1,4 +1,5 @@
 fully_qualified_domain = "https://davidpeach.co.uk"
+github_repository_name = ".co.uk"
 registry_name = "rhodes"
 database_cluster_name = "west-elizabeth"
 database_name = "strawberry"
