@@ -20,9 +20,14 @@ terraform {
 
 # Set the variable value in *.tfvars file
 # or using -var="do_token=..." CLI option
-variable "do_token" {}
-variable "github_token" {}
+variable "do_token" {
+    sensitive = true
+}
+variable "github_token" {
+    sensitive = true
+}
 variable "fully_qualified_domain" {}
+variable "github_repository_name" {}
 variable "registry_name" {}
 variable "database_cluster_name" {}
 variable "database_name" {}
@@ -78,20 +83,20 @@ resource "digitalocean_kubernetes_cluster" "kubernetes_cluster" {
 }
 
 resource "github_actions_secret" "registry_endpoint_secret" {
-  repository       = "laravel-app-k8s"
+  repository       = var.github_repository_name
   secret_name      = "DO_REGISTRY_ENDPOINT"
   plaintext_value  = digitalocean_container_registry.registry.endpoint
 }
 
 # Create a github action secret for repos for the DO Token.
 resource "github_actions_secret" "do_access_token_secret" {
-  repository       = "laravel-app-k8s"
+  repository       = var.github_repository_name
   secret_name      = "DO_ACCESS_TOKEN"
   plaintext_value  = var.do_token
 }
 
 resource "github_actions_secret" "laravel_env_encryption_key_secret" {
-  repository       = "laravel-app-k8s"
+  repository       = var.github_repository_name
   secret_name      = "LARAVEL_ENV_ENCRYPTION_KEY"
   plaintext_value  = "3UVsEgGVK36XN82KKeyLFMhvosbZN1aF"
 }
