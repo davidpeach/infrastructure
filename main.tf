@@ -23,7 +23,16 @@ terraform {
 variable "do_token" {
     sensitive = true
 }
+variable "spaces_access_id" {
+    sensitive = true
+}
+variable "spaces_secret_key" {
+    sensitive = true
+}
 variable "github_token" {
+    sensitive = true
+}
+variable "laravel_encryption_secret" {
     sensitive = true
 }
 variable "fully_qualified_domain" {}
@@ -37,16 +46,22 @@ variable "spaces_bucket_name" {}
 
 provider "digitalocean" {
   token = var.do_token
+  spaces_access_id  = var.spaces_access_id
+  spaces_secret_key = var.spaces_secret_key
 }
 
 provider "github" {
     token = var.github_token
 }
 
-resource "digitalocean_vpc" "vpc_network" {
-  name   = var.fully_qualified_domain
-  region = "lon1"
+data "digitalocean_vpc" "vpc_network" {
+  name = "davidpeach.co.uk"
 }
+
+/* resource "digitalocean_vpc" "vpc_network" { */
+/*   name   = "davidpeach.co.uk" */
+/*   region = "lon1" */
+/* } */
 
 resource "digitalocean_container_registry" "registry" {
   name                   = var.registry_name
@@ -54,20 +69,21 @@ resource "digitalocean_container_registry" "registry" {
   region                  = "ams3"
 }
 
-resource "digitalocean_database_db" "database" {
-  cluster_id = digitalocean_database_cluster.database_cluster.id
-  name       = var.database_name
-}
+/* resource "digitalocean_database_db" "database" { */
+/*   cluster_id = digitalocean_database_cluster.database_cluster.id */
+/*   name       = var.database_name */
+/* } */
 
-resource "digitalocean_database_cluster" "database_cluster" {
-  name       = var.database_cluster_name
-  engine     = "mysql"
-  version    = "8"
-  size       = "db-s-1vcpu-1gb"
-  region     = "lon1"
-  node_count = 1
-  private_network_uuid = digitalocean_vpc.vpc_network.id
-}
+/* resource "digitalocean_database_cluster" "database_cluster" { */
+/*   name       = var.database_cluster_name */
+/*   engine     = "mysql" */
+/*   version    = "8" */
+/*   size       = "db-s-1vcpu-1gb" */
+/*   region     = "lon1" */
+/*   node_count = 1 */
+/*   private_network_uuid = data.digitalocean_vpc.vpc_network.id */
+/*   /1* private_network_uuid = digitalocean_vpc.vpc_network.id *1/ */
+/* } */
 
 resource "digitalocean_kubernetes_cluster" "kubernetes_cluster" {
   name   = var.kubernetes_cluster_name
@@ -98,7 +114,7 @@ resource "github_actions_secret" "do_access_token_secret" {
 resource "github_actions_secret" "laravel_env_encryption_key_secret" {
   repository       = var.github_repository_name
   secret_name      = "LARAVEL_ENV_ENCRYPTION_KEY"
-  plaintext_value  = "3UVsEgGVK36XN82KKeyLFMhvosbZN1aF"
+  plaintext_value  = var.laravel_encryption_secret
 }
 
 resource "digitalocean_spaces_bucket" "bucket" {
