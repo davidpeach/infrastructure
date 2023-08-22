@@ -35,13 +35,13 @@ resource "digitalocean_database_cluster" "database_cluster" {
     private_network_uuid = data.digitalocean_vpc.vpc_network.id
 }
 
-resource "digitalocean_database_db" "davidpeachcouk_mysql_database" {
+resource "digitalocean_database_db" "mysql_database" {
     cluster_id = digitalocean_database_cluster.database_cluster.id
-    name       = var.davidpeachcouk_mysql_database_name
+    name       = var.mysql_database_name
 }
 
-resource "digitalocean_spaces_bucket" "davidpeachcouk_spaces_bucket" {
-    name   = var.davidpeachcouk_spaces_bucket_name
+resource "digitalocean_spaces_bucket" "spaces_bucket" {
+    name   = var.spaces_bucket_name
     region = "ams3"
     acl    = "public-read"
 
@@ -55,7 +55,7 @@ resource "digitalocean_spaces_bucket" "davidpeachcouk_spaces_bucket" {
     cors_rule {
         allowed_headers = ["*"]
         allowed_methods = ["PUT", "POST", "DELETE"]
-        allowed_origins = [var.davidpeachcouk_fully_qualified_domain]
+        allowed_origins = [var.fully_qualified_domain]
         max_age_seconds = 3000
     }
 }
@@ -63,30 +63,30 @@ resource "digitalocean_spaces_bucket" "davidpeachcouk_spaces_bucket" {
 resource "digitalocean_certificate" "cert" {
     name    = "spaces-cdn-cert"
     type    = "lets_encrypt"
-    domains = [var.davidpeachcouk_spaces_fully_qualified_domain]
+    domains = [var.spaces_fully_qualified_domain]
 }
 
 resource "digitalocean_cdn" "mycdn" {
-    origin           = digitalocean_spaces_bucket.davidpeachcouk_spaces_bucket.bucket_domain_name
-    custom_domain    = var.davidpeachcouk_spaces_fully_qualified_domain
+    origin           = digitalocean_spaces_bucket.spaces_bucket.bucket_domain_name
+    custom_domain    = var.spaces_fully_qualified_domain
     certificate_name = digitalocean_certificate.cert.name
 }
 
 resource "github_actions_secret" "registry_endpoint_secret" {
-    repository       = var.davidpeachcouk_github_repository_name
+    repository       = var.github_repository_name
     secret_name      = "DO_REGISTRY_ENDPOINT"
     plaintext_value  = digitalocean_container_registry.registry.endpoint
 }
 
 resource "github_actions_secret" "do_access_token_secret" {
-    repository       = var.davidpeachcouk_github_repository_name
+    repository       = var.github_repository_name
     secret_name      = "DO_ACCESS_TOKEN"
     plaintext_value  = var.do_token
 }
 
 resource "github_actions_secret" "laravel_env_encryption_key_secret" {
-    repository       = var.davidpeachcouk_github_repository_name
+    repository       = var.github_repository_name
     secret_name      = "LARAVEL_ENV_ENCRYPTION_KEY"
-    plaintext_value  = var.davidpeachcouk_laravel_encryption_secret
+    plaintext_value  = var.laravel_encryption_secret
 }
 

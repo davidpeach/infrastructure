@@ -24,17 +24,17 @@ variable "github_token" {
     sensitive = true
 }
 
-variable "davidpeachcouk_laravel_encryption_secret" {
+variable "laravel_encryption_secret" {
     sensitive = true
 }
 
 # Specifics to my personal website.
 # I may have other domains in my cluster, requiring extra variables.
-variable "davidpeachcouk_fully_qualified_domain" {}
-variable "davidpeachcouk_github_repository_name" {}
-variable "davidpeachcouk_mysql_database_name" {}
-variable "davidpeachcouk_spaces_bucket_name" {}
-variable "davidpeachcouk_spaces_fully_qualified_domain" {}
+variable "fully_qualified_domain" {}
+variable "github_repository_name" {}
+variable "mysql_database_name" {}
+variable "spaces_bucket_name" {}
+variable "spaces_fully_qualified_domain" {}
 
 # The container registry I want
 variable "registry_name" {}

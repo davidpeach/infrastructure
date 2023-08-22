@@ -5,13 +5,13 @@
 #############################################################################################################
 
 terraform {
-    cloud {
-        organization = "davidpeach"
+    # cloud {
+    #     organization = "davidpeach"
 
-        workspaces {
-            name = "redemption"
-        }
-    }
+    #     workspaces {
+    #         name = "redemption"
+    #     }
+    # }
     required_providers {
         digitalocean = {
             source = "digitalocean/digitalocean"
