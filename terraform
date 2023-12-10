@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+terraform "$@" \
+	-var "do_token=$(cat ~/do-token)" \
+	-var "github_token=$(cat ~/github-token)" \
+	-var "spaces_access_id=$(cat ~/spaces-access-id)" \
+	-var "spaces_secret_key=$(cat ~/spaces-secret-key)"

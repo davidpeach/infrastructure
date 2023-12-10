@@ -24,10 +24,6 @@ variable "github_token" {
     sensitive = true
 }
 
-variable "laravel_encryption_secret" {
-    sensitive = true
-}
-
 # Specifics to my personal website.
 # I may have other domains in my cluster, requiring extra variables.
 variable "fully_qualified_domain" {}

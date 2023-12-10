@@ -84,9 +84,3 @@ resource "github_actions_secret" "do_access_token_secret" {
     plaintext_value  = var.do_token
 }
 
-resource "github_actions_secret" "laravel_env_encryption_key_secret" {
-    repository       = var.github_repository_name
-    secret_name      = "LARAVEL_ENV_ENCRYPTION_KEY"
-    plaintext_value  = var.laravel_encryption_secret
-}
-

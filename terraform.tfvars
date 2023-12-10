@@ -14,7 +14,7 @@ mysql_database_cluster_name = "west-elizabeth"
 mysql_database_cluster_size = "db-s-1vcpu-1gb"
 
 kubernetes_cluster_name = "new-hanover"
-kubernetes_cluster_version = "1.25.4-do.0"
+kubernetes_cluster_version = "1.28.2-do.0"
 
 node_pool_name = "valentine"
 node_pool_node_type = "s-2vcpu-2gb"
