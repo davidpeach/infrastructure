@@ -4,12 +4,8 @@
 
 fully_qualified_domain = "https://davidpeach.co.uk"
 github_repository_name = ".co.uk"
-mysql_database_name = "strawberry"
 
 registry_name = "rhodes"
-
-mysql_database_cluster_name = "west-elizabeth"
-mysql_database_cluster_size = "db-s-1vcpu-1gb"
 
 kubernetes_cluster_name = "new-hanover"
 kubernetes_cluster_version = "1.28.2-do.0"

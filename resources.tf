@@ -23,23 +23,6 @@ resource "digitalocean_container_registry" "registry" {
     region                  = "ams3"
 }
 
-resource "digitalocean_database_cluster" "database_cluster" {
-    name       = var.mysql_database_cluster_name
-    engine     = "mysql"
-
-    # Grab the latest version number with `doctl databases options versions`
-    version    = "8"
-    size       = var.mysql_database_cluster_size
-    region     = "lon1"
-    node_count = 1
-    private_network_uuid = data.digitalocean_vpc.vpc_network.id
-}
-
-resource "digitalocean_database_db" "mysql_database" {
-    cluster_id = digitalocean_database_cluster.database_cluster.id
-    name       = var.mysql_database_name
-}
-
 resource "github_actions_secret" "registry_endpoint_secret" {
     repository       = var.github_repository_name
     secret_name      = "DO_REGISTRY_ENDPOINT"

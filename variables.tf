@@ -20,15 +20,9 @@ variable "github_token" {
 # I may have other domains in my cluster, requiring extra variables.
 variable "fully_qualified_domain" {}
 variable "github_repository_name" {}
-variable "mysql_database_name" {}
 
 # The container registry I want
 variable "registry_name" {}
-
-# MySQL database cluster used by all.
-# Each database will be created for each of my sites that require one.
-variable "mysql_database_cluster_name" {}
-variable "mysql_database_cluster_size" {}
 
 # The Kubernetes Cluster.
 variable "kubernetes_cluster_name" {}
