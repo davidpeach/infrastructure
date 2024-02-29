@@ -16,11 +16,6 @@ variable "github_token" {
     sensitive = true
 }
 
-# Specifics to my personal website.
-# I may have other domains in my cluster, requiring extra variables.
-variable "fully_qualified_domain" {}
-variable "github_repository_name" {}
-
 # The container registry I want
 variable "registry_name" {}
 

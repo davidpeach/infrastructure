@@ -23,12 +23,6 @@ resource "digitalocean_container_registry" "registry" {
     region                  = "ams3"
 }
 
-resource "github_actions_secret" "registry_endpoint_secret" {
-    repository       = var.github_repository_name
-    secret_name      = "DO_REGISTRY_ENDPOINT"
-    plaintext_value  = digitalocean_container_registry.registry.endpoint
-}
-
 resource "github_actions_secret" "do_access_token_secret" {
     repository       = var.github_repository_name
     secret_name      = "DO_ACCESS_TOKEN"

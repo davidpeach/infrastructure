@@ -4,6 +4,3 @@
 # It can then be used when creating other resources.
 #########################################################################
 
-data "digitalocean_vpc" "vpc_network" {
-    name = "davidpeach.co.uk"
-}

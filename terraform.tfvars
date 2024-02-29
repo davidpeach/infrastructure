@@ -2,9 +2,6 @@
 # These are the non-sensitive values for the configuration to run.
 ##################################################################
 
-fully_qualified_domain = "https://davidpeach.co.uk"
-github_repository_name = ".co.uk"
-
 registry_name = "rhodes"
 
 kubernetes_cluster_name = "new-hanover"
