@@ -22,10 +22,3 @@ resource "digitalocean_container_registry" "registry" {
     subscription_tier_slug = "starter"
     region                  = "ams3"
 }
-
-resource "github_actions_secret" "do_access_token_secret" {
-    repository       = var.github_repository_name
-    secret_name      = "DO_ACCESS_TOKEN"
-    plaintext_value  = var.do_token
-}
-
