@@ -5,8 +5,6 @@
 fully_qualified_domain = "https://davidpeach.co.uk"
 github_repository_name = ".co.uk"
 mysql_database_name = "strawberry"
-spaces_bucket_name = "blackwater"
-spaces_fully_qualified_domain = "cdn.davidpeach.co.uk"
 
 registry_name = "rhodes"
 

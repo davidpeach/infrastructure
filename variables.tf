@@ -12,14 +12,6 @@ variable "do_token" {
     sensitive = true
 }
 
-variable "spaces_access_id" {
-    sensitive = true
-}
-
-variable "spaces_secret_key" {
-    sensitive = true
-}
-
 variable "github_token" {
     sensitive = true
 }
@@ -29,8 +21,6 @@ variable "github_token" {
 variable "fully_qualified_domain" {}
 variable "github_repository_name" {}
 variable "mysql_database_name" {}
-variable "spaces_bucket_name" {}
-variable "spaces_fully_qualified_domain" {}
 
 # The container registry I want
 variable "registry_name" {}

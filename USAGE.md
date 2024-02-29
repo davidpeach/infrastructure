@@ -53,17 +53,6 @@ Copy the generated access token and create an `ENV` variable in your `.bashrc` f
 export TF_VAR_do_token=your_long_access_token_here
 ```
 
-In the same API tokens page, click "Generate new key" in the Spaces access keys section.
-
-Give it a descriptive name and click the tick button.
-
-Then copy and paste both the api key and secret into your `.bashrc` file like as follows:
-
-```
-export TF_VAR_spaces_access_id=your_spaces_access_id
-export TF_VAR_spaces_secret_key=your_spaces_secret_key
-```
-
 ### Github Access Token
 
 In your github account, go to settings > developer settings > Personal Access Tokens. I use the classic token for now.

@@ -40,38 +40,6 @@ resource "digitalocean_database_db" "mysql_database" {
     name       = var.mysql_database_name
 }
 
-resource "digitalocean_spaces_bucket" "spaces_bucket" {
-    name   = var.spaces_bucket_name
-    region = "ams3"
-    acl    = "public-read"
-
-    cors_rule {
-        allowed_headers = ["*"]
-        allowed_methods = ["GET"]
-        allowed_origins = ["*"]
-        max_age_seconds = 3000
-    }
-
-    cors_rule {
-        allowed_headers = ["*"]
-        allowed_methods = ["PUT", "POST", "DELETE"]
-        allowed_origins = [var.fully_qualified_domain]
-        max_age_seconds = 3000
-    }
-}
-
-resource "digitalocean_certificate" "cert" {
-    name    = "spaces-cdn-cert"
-    type    = "lets_encrypt"
-    domains = [var.spaces_fully_qualified_domain]
-}
-
-resource "digitalocean_cdn" "mycdn" {
-    origin           = digitalocean_spaces_bucket.spaces_bucket.bucket_domain_name
-    custom_domain    = var.spaces_fully_qualified_domain
-    certificate_name = digitalocean_certificate.cert.name
-}
-
 resource "github_actions_secret" "registry_endpoint_secret" {
     repository       = var.github_repository_name
     secret_name      = "DO_REGISTRY_ENDPOINT"
