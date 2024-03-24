@@ -1,5 +1,5 @@
 #!/usr/bin/bash
 
 terraform "$@" \
-	-var "do_token=$(cat ~/.keys/digitalocean)" \
-	-var "github_token=$(cat ~/github-token)"
+	-var "do_token=$(cat ~/.keys/digital-ocean)" \
+	-var "github_token=$(cat ~/.keys/github-token)"
